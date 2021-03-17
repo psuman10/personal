@@ -8,7 +8,4 @@ urlpatterns = [
     path('',views.index),
   
 
-
-
-    
 ]
