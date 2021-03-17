@@ -1,9 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from . models import Product
 
 
 def index(request):
-    return HttpResponse("wow")
+    products = Product.objects.all()
+
+    context = {
+        'products': products
+    }
+
+    return render(request,'BC/index.html',context)
 
 
 
