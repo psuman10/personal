@@ -15,7 +15,7 @@ admin.site.register(Cart,CartAdmin)
 
 
 class OrderPlacedAdmin(admin.ModelAdmin):
-    list_display=['id','user','customer','customer_info','product_info','product','quantity','ordered_date','status']
+    list_display=['id','user','customer',product','quantity','ordered_date','status']
 admin.site.register(OrderPlaced,OrderPlacedAdmin)
 
 
