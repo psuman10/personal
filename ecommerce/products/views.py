@@ -1,27 +1,46 @@
 from django.shortcuts import render
-from . models import Product
-from . forms import CustomerProfileForm, ProductForm
-from django.views import View
+
+
+def address(request):
+ return render(request, 'BC/address.html')
+
+def add_to_cart(request):
+ return render(request, 'BC/addtocart.html')
+
+def buy_now(request):
+ return render(request, 'BC/buynow.html')
+
+def change_password(request):
+ return render(request, 'BC/changepassword.html')
+
+def checkout(request):
+ return render(request, 'BC/checkout.html')
+
+def customerregistration(request):
+ return render(request, 'BC/customerregistration.html')
+
+def home(request):
+ return render(request, 'BC/home.html')
+
+def login(request):
+ return render(request, 'BC/login.html')
+
+def orders(request):
+ return render(request, 'BC/orders.html')
+
+def product_detail(request):
+ return render(request, 'BC/productdetail.html')
+
+def profile(request):
+ return render(request, 'BC/profile.html')
 
 
 
 
 
-def index(request):
-    products = Product.objects.all()
-
-    context = {
-        'products': products
-    }
-
-    return render(request,'BC/index.html',context)
 
 
-def ProductView(request):
 
-    form = ProductForm()
-    context = {
-        'form': form  
-    }
 
-    return render(request,'BC/addProduct.html',context)
+
+
