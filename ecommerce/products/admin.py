@@ -1,28 +1,23 @@
 from django.contrib import admin
+from .models import (Customer,Product,Cart,OrderPlaced)
+from django.utils.html import format_html
+from django.urls import reverse
 
-from .models import Product,Cart,OrderPlaced,Customer
-
-
-class ProductAdmin(admin.ModelAdmin):
-    list_display=['id','title','selling_price','discounted_price','description','brand','category','product_image']
-admin.site.register(Product,ProductAdmin)
-
-
-class CartAdmin(admin.ModelAdmin):
-    list_display=['id','user','product','quantity']
-admin.site.register(Cart,CartAdmin)
-
-
-
-class OrderPlacedAdmin(admin.ModelAdmin):
-    list_display=['id','user','customer','product','quantity','ordered_date','status']
-admin.site.register(OrderPlaced,OrderPlacedAdmin)
-
-
+@ admin.register(Customer)
 class CustomerModelAdmin(admin.ModelAdmin):
     list_display=['id','user','name','locality','city','state']
-admin.site.register(Customer,CustomerModelAdmin)
 
+@ admin.register(Product)
+class ProductModelAdmin(admin.ModelAdmin):
+    list_display=['id','title','selling_price','discounted_price','description','brand','category','product_image']
 
+@ admin.register(Cart)
+class CartModelAdmin(admin.ModelAdmin):
+    list_display=['id','user','product','quantity']
+
+@ admin.register(OrderPlaced)
+class OrderPlacedModelAdmin(admin.ModelAdmin):
+    list_display=['id','user','customer','product','quantity','ordered_date','status']
+ 
 
 
