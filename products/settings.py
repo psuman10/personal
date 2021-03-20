@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ecommerce',
+    'ecommerce'
 ]
 
 MIDDLEWARE = [
@@ -72,6 +72,23 @@ DATABASES = {
 }
 
 
+# DATABASES = {
+#    'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'bikerschoice',
+#         'USER':'root',
+#         'PASSWORD':'Changepassword108690',
+#         'HOST':'localhost',
+#         'PORT':'3306',
+#         'OPTIONS':{
+#             'init_command':"SET sql_mode='STRICT_TRANS_TABLES'"
+#         }
+ 
+#     }
+# }
+
+
+
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -111,3 +128,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL= '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+

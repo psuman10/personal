@@ -1,5 +1,5 @@
-from django.apps import ProductsConfig
+from django.apps import EcommerceConfig
 
 
-class ProductsConfig(ProductsConfig):
+class ProductsConfig(EcommerceConfig):
     name = 'ecommerce'
