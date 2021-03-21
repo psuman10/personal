@@ -6,11 +6,11 @@
 
 
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleCaptions" data-bs-slide-to="1"></li>
-    <li data-target="#carouselExampleCaptions" data-bs-slide-to="2"></li>
-  </ol>
+    <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
       <img src="{% static 'BBC/images/banner/royal.jpg' %}" class="d-block w-100" alt="...">
@@ -42,9 +42,38 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </a>
+
+</div>
   
 {% endblock banner_slider %}
 
+
+
+
+
+
+
+{% block livesale %}
+<!-- Live Sale Section -->
+<div class="container">
+  <br><br><br><br>
+  <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-12 test">
+          <img src="{% static 'BBC/images/banner/jacket-1.jpg' %}" class="img-fluid" alt="...">
+    </div>
+
+     <div class="col-lg-4 col-md-4 col-sm-4 col-12 test">
+          <img src="{% static 'BBC/images/banner/bi.jpg' %}" class="img-fluid" alt="...">
+    </div>
+
+      <div class="col-lg-4 col-md-4 col-sm-4 col-12 test">
+          <img src="{% static 'BBC/images/banner/jacket.jpg' %}" class="img-fluid" alt="...">
+    </div>
+  </div>
+</div>
+
+<!-- End Live Sale Section -->
+{% endblock livesale %}
 
 
 {% block main-content %}
