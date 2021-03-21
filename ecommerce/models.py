@@ -28,6 +28,7 @@ CATEGORY_CHOICES = (
     ('H', 'Halfface'),
     ('B', 'BOOTS'),
     ('W', 'WEARS'),
+    
 )
 
 

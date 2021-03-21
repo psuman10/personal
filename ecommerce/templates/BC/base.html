@@ -38,7 +38,7 @@
                Helmets
              </a>
              <ul class="dropdown-menu" aria-labelledby="HelmetsDropdown">
-               {% comment %} <li><a class="dropdown-item" href="{% url 'Halfface' %}">HALFFACE</a></li> {% endcomment %}
+               <li><a class="dropdown-item" href="{% url 'Halfface' %}">HALFFACE</a></li>
                <li><a class="dropdown-item" href="{% url 'Fullface' %}">FULLFACE</a></li>
              </ul>
            </li>
@@ -47,8 +47,8 @@
                Riding Gears
              </a>
              <ul class="dropdown-menu" aria-labelledby="RidingGearsDropdown">
-               <li><a class="dropdown-item" href="#">Boots</a></li>
-               <li><a class="dropdown-item" href="#"> Pair Wears</a></li>
+                <li><a class="dropdown-item" href="{% url 'boot' %}">BOOTS</a></li>
+               <li><a class="dropdown-item" href="{% url 'Wears' %}">PAIRWEARS</a></li> 
              </ul>
            </li>
          </ul>

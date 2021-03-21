@@ -5,15 +5,17 @@ from django.conf import settings
 from django.contrib.auth import views as auth_views
 
 
-
 urlpatterns = [
     path('', views.home),
     path('product-detail/', views.product_detail, name='product-detail'),
     path('cart/', views.add_to_cart, name='add-to-cart'),
 
-
-    # path('Halfface/', views.Halfface, name='Halfface'),
-    # path('Halfface/<slug:data>', views.Halfface, name='halfdata'),
+    path('Wears/', views.Wears, name='Wears'),
+    path('Wears/<slug:data>', views.Wears, name='Wearsdata'),
+    path('boot/', views.boot, name='boot'),
+    path('boot/<slug:data>', views.boot, name='bootdata'),
+    path('Halfface/', views.Halfface, name='Halfface'),
+    path('Halfface/<slug:data>', views.Halfface, name='halfdata'),
     path('Fullface/', views.Fullface, name='Fullface'),
     path('Fullface/<slug:data>', views.Fullface, name='Fulldata'),
 
