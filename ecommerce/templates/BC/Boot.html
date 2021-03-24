@@ -1,13 +1,13 @@
  {% extends 'BC/base.html' %}
 {% load static %}
-{% block title %}HALF FACE HELMETS{% endblock title %}
+{% block title %}Boot{% endblock title %}
 {% block main-content %}
 <div class="container my-5">
  <div class="row">
   <div class="col-sm-3">
    <div class="list-group">
    <a href="{% url 'boot' %}" class="list-group-item list-group-item-action" aria-current='true'>All BOOTS</a>
-   <a href="{% url 'bootdata' 'Alpinestar' %}" class="list-group-item list-group-item-action" aria-current='true'>Alpinestar</a>
+   {% comment %} <a href="{% url 'bootdata' 'Alpinestar' %}" class="list-group-item list-group-item-action" aria-current='true'>Alpinestar</a> {% endcomment %}
 
    <a href="{% url 'bootdata' 'Below' %}" class="list-group-item list-group-item-action" aria-current='true'>Below Rs. 10000</a>
 

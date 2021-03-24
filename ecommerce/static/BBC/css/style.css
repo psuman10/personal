@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+.web-logo{
+    width: 6rem;
+}
 
 body{
     line-height: 1.5;
     font-family: 'Poppins', sans-serif;
 }
+
 
 *{
     margin: 0;
@@ -32,6 +36,10 @@ body{
 .owl-next span{
  font-size: 24px;
  font-weight: bold;
+}
+
+.navbar-brand img{
+   margin-left: -200px;
 }
 
 
@@ -132,7 +140,8 @@ ul{
     text-align: center;
     color: red;
     font-weight: 400;
-
+    margin-top: 20px;
+margin-bottom: -40px;
 }
 
 
@@ -150,6 +159,7 @@ ul{
     color: #24262b;
     background-color: #ffffff;
 }
+
 
 @media(max-width: 767px){
     .footer-col{
