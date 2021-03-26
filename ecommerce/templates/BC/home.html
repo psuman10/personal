@@ -72,6 +72,21 @@
 
 
 {% block main-content %}
+<!-- 1st Product Slider -->
+<div class="m-3">
+ <h2>Full Face Helmets</h2>
+
+
+ <div class="owl-carousel" id="slider1">
+ {% for f in ff %}
+  <a href="{% url 'product-detail' f.id %}" class="btn"><div class="item"><img src="{{f.product_image.url}}" alt="not" height="300px"><span class="fw-bold">{{f.title}}</span><br><span class="fs-5">Rs. {{f.discounted_price}}</span></div></a>
+  {% endfor %}
+</div> 
+</div>
+
+
+
+
 
 
 {% endblock main-content %}

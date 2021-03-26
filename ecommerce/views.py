@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.views import View
-from django.db.models import Q
 from .models import  Product,Cart
 
 
@@ -19,16 +18,9 @@ class ProductView(View):
 
 
 class ProductDetailView(View):
-    def get(self, request, pk):
-        totalitem = 0
-        product = Product.objects.get(pk=pk)
-        item_already_in_cart = False
-        if request.user.is_authenticated:
-            totalitem = len(Cart.objects.filter(user=request.user))
-            item_already_in_cart = Cart.objects.filter(
-                Q(product=product.id) & Q(user=request.user)).exists()
-        return render(request, 'BC/productdetail.html', {'product': product,'totalitem': totalitem})
-        # return render(request, 'BC/productdetail.html', {'product': product, 'item_already_in_cart': item_already_in_cart, 'totalitem': totalitem})
+
+    pass
+
 
 
 
