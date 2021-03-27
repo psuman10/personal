@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{% static 'BBC/css/style.css' %}">
 
 
+
+
     <title>Biker's Choice | {% block title %} {% endblock title %} </title>
     <link rel="icon" href="{% static 'BBC/images/banner/logo.png' %}">
 </head>
@@ -58,20 +60,68 @@
                         <li><a class="dropdown-item" href="{% url 'boot' %}">BOOTS</a></li>
                         <li><a class="dropdown-item" href="{% url 'Wears' %}">PAIRWEARS</a></li>
                     </ul>
-                </li>
-            </ul>
-            </div>
-    </div>
-</nav>
+
+                    </li>
+                </ul>
+            
+            <form class="search-box" action="" method="get" >
+           <input class="search-txt" type="text" name="" placeholder=" search">
+           <button class="search-btn" href="#" type="submit">S</button>
+         </form>
+
+         <div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+           
+           <li class="nav-item dropdown mx-2">
+              <a class="nav-link dropdown-toggle text-white " href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            user
+              </a>
+              
+            </li>
+           
+         <div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item mx-2">
+             <a href="#" class="nav-link text-white  "><span class="fa fa-shopping-cart text-white"></span> Cart </a>
+            </li> 
+            
+            <li class="nav-item mx-2">
+             <a href=="#" class="nav-link text-white">Login</a>
+            </li>
+            <li class="nav-item mx-2">
+             <a href=="#" class="nav-link text-white">Registration</a>
+            </li>
+            
+          </ul>
+         </div>
+       </div>
+     </div>
+    </nav>
+    {% block banner_slider %} {% endblock banner_slider %}
+    {% block livesale %} {% endblock livesale %}
+    {% block main-content %} {% endblock main-content %}
+
+    {% block payment-gateway %}
+    
+    {% endblock payment-gateway %}
 
 
 
-</div>
-</div>
-</nav>
-{% block banner_slider %} {% endblock banner_slider %}
-{% block livesale %} {% endblock livesale %}
-{% block main-content %} {% endblock main-content %}
+           
+ 
+           
+           
+          
+     
+
+{% comment %} <div class="mobile-position">
+             <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="darkSwitch">
+                  <label class="custom-control-label" for="darkSwitch" style="color: #0b2e13">Dark</label>
+             </div>
+        </div>
+</div> {% endcomment %}
+
 
 
 
@@ -151,5 +201,15 @@
 <script src="{% static 'BBC/js/all.min.js' %}"></script>
 <script src="{% static 'BBC/js/myscript.js' %}"></script>
 <script src="{% static 'BBC/css/style.css' %}"></script>
+<script src="{% static 'BBC/css/dark-mode.css' %}"></script>
+<script src="{% static 'BBC/js/dark-mode-switch.min.js' %}"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+
+
 </body>
 </html>
+
+
+
+
