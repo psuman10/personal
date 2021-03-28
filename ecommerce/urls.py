@@ -3,6 +3,7 @@ from . import views
 from django.conf.urls.static import static
 from django.conf import settings
 from django.contrib.auth import views as auth_views
+from .forms import LoginForm
 
 
 urlpatterns = [
@@ -24,7 +25,8 @@ urlpatterns = [
     path('address/', views.address, name='address'),
     path('orders/', views.orders, name='orders'),
     path('changepassword/', views.change_password, name='changepassword'),
-    path('login/', views.login, name='login'),
-    path('registration/', views.customerregistration, name='customerregistration'),
+    path('registration/', views.CustomerRegistrationView.as_view(),name='customerregistration'),
     path('checkout/', views.checkout, name='checkout'),
+    path('login/', auth_views.LoginView.as_view(template_name='BC/login.html',authentication_form=LoginForm), name='login'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

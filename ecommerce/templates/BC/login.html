@@ -17,9 +17,18 @@ Login
           <small class="text-danger">{{fm.errors|striptags}}</small><br />
         </div>
         {% endfor %} 
+         <small>
+          <a href="# ">Forgot Password? </a> </small>
         <br />
         <input type="submit" value="Login" class="btn btn-primary mt-4" />
         <br />
+        <div class="text-center text-primary fw-bold">
+          <small
+            >New To Biker's Choice?
+            <a href="{% url 'customerregistration' %}" class="text-center"
+              >Create an Account</a>
+          </small>
+        </div>
         {% if form.non_field_errors %} 
         {% for error in form.non_field_errors %}
         <p class="alert alert-danger my-3">{{error}}</p>
