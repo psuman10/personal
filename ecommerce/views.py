@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView
 
 
 
@@ -223,3 +224,16 @@ def boot(request, data=None):
         BT = Product.objects.filter(
             category='B').filter(discounted_price__gt=10000)
     return render(request, 'BC/Boot.html', {'BT': BT, 'totalitem': totalitem})
+
+
+
+
+class SearchView(TemplateView):
+    template_name = "BC/search.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        kw = self.request.GET.get("keyword")
+        results = Product.objects.filter(Q(title__icontains=kw))
+        context["results"] = results
+        return context

@@ -46,9 +46,6 @@ class Product(models.Model):
 
 
 
-
-
-
 STATUS_CHOICES = (
     ('Accepted', 'Accepted'),
     ('Packed', 'Packed'),

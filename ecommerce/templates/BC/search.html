@@ -1,0 +1,32 @@
+{% extends 'BC/base.html' %}
+
+{% block title %}
+<title>Search Results</title>
+{% endblock %}
+
+{% block main-content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>search <span class="text-success">"{{request.GET.keyword}}"</span></h3>
+            <hr>
+            
+            {% for result in results %}
+            <div class="row">
+            <a href="{% url 'product-detail' result.id %}" class="btn">
+               <div class="col-md-3"><img src="{{result.product_image.url}}" alt="not" class="img-fluid">
+                  <span class="fw-bold"><strong>{{result.title}}</strong></span><br>
+  <span class="fs-5"><strong>Rs. {{result.discounted_price}} </strong></span>
+            </div>
+            </div>
+            {% empty %}
+            <div class="jumbotron">No results found</div>
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
+
+
+{% endblock main-content %}
+
