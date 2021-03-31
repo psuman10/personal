@@ -21,7 +21,9 @@ urlpatterns = [
     path('Halfface/<slug:data>', views.Halfface, name='halfdata'),
     path('Fullface/', views.Fullface, name='Fullface'),
     path('Fullface/<slug:data>', views.Fullface, name='Fulldata'),
-    
+    path('deleteaddress/<int:id>/', views.delete_address, name='deleteaddress'),
+    path('<int:id>/',views.update_address.as_view(),name="updateaddress"),
+    path('profile1/', views.user_account, name='profile1'),
 
     path('buy/', views.buy_now, name='buy-now'),
     path('profile/', views.profile, name='profile'),

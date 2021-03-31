@@ -53,24 +53,36 @@ class CustomerRegistrationView(View):
 
 
 
-def loginVew(request):
+
+
+
+
+def login_user(request):
     if request.user.is_authenticated:
-        return redirect('home')
+        return render(request,'BC/home.html')
     else:
         if request.method == 'POST':
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-
-            user = authenticate(request, username=username, password=password)
-
-            if user is not None:
-                login(request, user)
-                return redirect('home')
-            else:
-                messages.info(request, 'Username OR password is incorrect')
-
-        context = {}
-        return render(request, 'BC/login.html', context)
+            form = LoginForm(request.POST)
+            if form.is_valid():
+                data = form.cleaned_data
+                user = authenticate(request, username=data['username'],
+                                    password=data['password'])
+                if user is not None:
+                    if not user.is_staff:
+                        login(request, user)
+                        return redirect("home")
+                    elif user.is_staff:
+                        login(request, user)
+                        return redirect('/admin-dashboard')
+                else:
+                    messages.add_message(request, messages.ERROR,
+                                         'Username or Password is Invalid')
+                    return render(request, 'BC/login.html', {'form': form})
+    form = LoginForm()
+    context = {
+        'form': LoginForm
+    }
+    return render(request, 'BC/login.html', context)
 
 
 
@@ -99,16 +111,28 @@ def change_password(request):
  return render(request, 'BC/changepassword.html')
 
 def checkout(request):
-     return render(request, 'BC/checkout.html')
+    totalitem = 0
+    user = request.user
+    add = Customer.objects.filter(user=user)
+    cart_items = Cart.objects.filter(user=user)
+    amount = 0.0
+    shipping_amount = 100
+    if request.user.is_authenticated:
+        totalitem = len(Cart.objects.filter(user=request.user))
+
+    cart_product = [p for p in Cart.objects.all() if p.user == request.user]
+    if cart_product:
+        for p in cart_product:
+            tempamount = (p.quantity * p.product.discounted_price)
+            amount += tempamount
+        totalamount = amount + shipping_amount
+    return render(request, 'BC/checkout.html', {'add': add, 'totalamount': totalamount, 'cart_items': cart_items, 'totalitem': totalitem})
 
 def customerregistration(request):
  return render(request, 'BC/customerregistration.html')
 
 def home(request):
  return render(request, 'BC/home.html')
-
-def login(request):
- return render(request, 'BC/login.html')
 
 def orders(request):
  return render(request, 'BC/orders.html')
@@ -237,3 +261,36 @@ class SearchView(TemplateView):
         results = Product.objects.filter(Q(title__icontains=kw))
         context["results"] = results
         return context
+
+
+def delete_address(request,id):
+    if request.method=='POST':
+        pi=Customer.objects.get(pk=id)
+        pi.delete()
+        return HttpResponseRedirect('/profile')
+
+class update_address(View):
+    def get(self,request,id):
+        pi=Customer.objects.get(pk=id)
+        fm=CustomerProfileForm(instance=pi)
+        return render(request,'BC/Updateaddress.html',{'form':fm})
+
+    def post(self,request,id):
+       pi=Customer.objects.get(pk=id)
+       fm=CustomerProfileForm(request.POST,instance=pi)
+       if fm.is_valid():
+         fm.save()
+       return HttpResponseRedirect('/profile')
+
+
+def user_account(request):
+    profile = request.user.profile
+    form = ProfileForm(instance=profile)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Account Update Successful for ' + str(request.user))
+            return redirect('/profile1')
+    context = {'form': form}
+    return render(request, 'app/profile1.html', context)

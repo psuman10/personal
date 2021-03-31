@@ -1,5 +1,25 @@
-{% extends 'BC/base.html' %}
-{% load static %}
-{% block title %}Buy Now{% endblock title %}
-{% block main-content %}
+{% extends 'BC/base.html' %} {% load static %} {% block title %}Buy Now 
+{% endblock title %} {% block main-content %}
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-sm-6">
+      <h4>Order Summary</h4>
+      <hr>
+      {% for item in cart_items %}
+      <div class="card mb-2">
+        <div class="card-body">
+          <h5>Product: {{item.product.title}}</h5>
+          <p>Quantity: {{item.quantity}}</p>
+          <p class="fw-bold">Price: {{item.total_cost}}</p>
+        </div>
+      </div>
+      {% endfor %}
+      <p class="fw-bold">Total Cost + Rs.100 = {{totalamount}} </p>
+      
+    </div>
+    </div>
+  </div>
+</div>
 {% endblock main-content %}
+
+
