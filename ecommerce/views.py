@@ -8,11 +8,8 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
-
-
-
-
-
+from .models import Profile
+from .forms import ProfileForm
 
 
 class ProductView(View):
@@ -37,8 +34,8 @@ class ProductDetailView(View):
             totalitem = len(Cart.objects.filter(user=request.user))
             item_already_in_cart = Cart.objects.filter(
                 Q(product=product.id) & Q(user=request.user)).exists()
-        return render(request, 'BC/productdetail.html', {'product': product,'totalitem': totalitem})
-        # return render(request, 'BC/productdetail.html', {'product': product, 'item_already_in_cart': item_already_in_cart, 'totalitem': totalitem})
+        # return render(request, 'BC/productdetail.html', {'product': product,'totalitem': totalitem})
+        return render(request, 'BC/productdetail.html', {'product': product, 'item_already_in_cart': item_already_in_cart, 'totalitem': totalitem})
 
 
 
@@ -51,13 +48,9 @@ class CustomerRegistrationView(View):
         form = CustomerRegistrationForm(request.POST)
         if form.is_valid():
             messages.success(request, 'Congratulations!! Registered Successfully')
-            form.save()
+            user=form.save()
+            Profile.objects.create(user=user,username=user.username)
         return render(request, 'BC/customerregistration.html', {'form': form, 'active': 'btn-primary'})
-
-
-
-
-
 
 
 
@@ -90,26 +83,11 @@ def login_user(request):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def address(request):
  return render(request, 'BC/address.html')
 
-def buy_now(request):
- return render(request, 'BC/buynow.html')
+# def buy_now(request):
+#  return render(request, 'BC/buynow.html')
 
 def change_password(request):
  return render(request, 'BC/changepassword.html')
@@ -144,8 +122,8 @@ def orders(request):
 def product_detail(request):
      return render(request, 'BC/productdetail.html')
 
-def profile(request):
- return render(request, 'BC/profile.html')
+# def profile(request):
+#  return render(request, 'BC/profile.html')
 
 def add_to_cart(request):
     user = request.user
@@ -293,7 +271,6 @@ def user_account(request):
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Account Update Successful for ' + str(request.user))
             return redirect('/profile1')
     context = {'form': form}
     return render(request, 'BC/profile1.html', context)
@@ -369,3 +346,23 @@ def remove_cart(request):
             'totalamount': amount + shipping_amount
         }
         return JsonResponse(data)
+
+
+def ProfileView(request):
+    if request.method=='POST':
+        fm= CustomerProfileForm(request.POST)
+        if fm.is_valid():
+            usr = request.user
+            name=fm.cleaned_data['name']
+            locality=fm.cleaned_data['locality']
+            city=fm.cleaned_data['city']
+            state=fm.cleaned_data['state']
+            
+            
+            reg=Customer(user=usr,name=name,locality=locality,city=city,state=state)
+            reg.save()
+            fm= CustomerProfileForm()
+    else:
+        fm= CustomerProfileForm()
+    stud=Customer.objects.all()
+    return render(request,'BC/profile.html',{'form':fm,'stu':stud})

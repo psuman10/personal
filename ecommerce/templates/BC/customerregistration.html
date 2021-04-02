@@ -20,7 +20,8 @@ Registration{% endblock title %} {% block main-content %}
           <small class="text-danger"> {{fm.errors|striptags}} </small>
         </div>
         {% endfor %}
-        <input type="submit" value="Submit" class="btn btn-primary">
+        <input  type="submit" value="Submit" class="btn btn-primary">
+        {% comment %} <a href="{% url 'home' %}" class="btn btn-primary">Submit</a> {% endcomment %}
         <br>
         <div class="text-center text-primary fw-bold">
         {% if form.non_field_errors %}

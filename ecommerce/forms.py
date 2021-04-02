@@ -5,6 +5,7 @@ from django.utils.translation import gettext, gettext_lazy as _
 from django.contrib.auth import password_validation
 from .models import Customer
 from django.forms import ModelForm
+from .models import Profile
 
 class ProductForm(forms.Form):
     name= forms.CharField(max_length=200)
@@ -60,3 +61,10 @@ class MySetPasswordForm(SetPasswordForm):
 
     new_password2 = forms.CharField(label=_("Confirm New Password"), strip=False, widget=forms.PasswordInput(
         attrs={'autocomplete': 'new-password', 'class': 'form-control'}))
+
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model=Profile
+        fields='__all__'
+        exclude= ['user','username']

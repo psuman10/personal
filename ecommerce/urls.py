@@ -28,8 +28,8 @@ urlpatterns = [
     path('<int:id>/',views.update_address.as_view(),name="updateaddress"),
     path('profile1/', views.user_account, name='profile1'),
 
-    path('buy/', views.buy_now, name='buy-now'),
-    path('profile/', views.profile, name='profile'),
+    # path('buy/', views.buy_now, name='buy-now'),
+    path('profile/', views.ProfileView, name='profile'),
     path('address/', views.address, name='address'),
     path('orders/', views.orders, name='orders'),
     path('registration/', views.CustomerRegistrationView.as_view(),name='customerregistration'),
