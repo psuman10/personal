@@ -81,7 +81,17 @@
  {% for f in ff %}
   <a href="{% url 'product-detail' f.id %}" class="btn"><div class="item"><img src="{{f.product_image.url}}" alt="not" height="300px"><span class="fw-bold">{{f.title}}</span><br><span class="fs-5">Rs. {{f.discounted_price}}</span></div></a>
   {% endfor %}
-</div> 
+</div>
+
+
+ <div class="owl-carousel" id="slider2">
+ {% for h in Half %}
+  <a href="{% url 'product-detail' h.id %}" class="btn"><div class="item"><img src="{{h.product_image.url}}" alt="not" height="300px"><span class="fw-bold">{{h.title}}</span><br><span class="fs-5">Rs. {{h.discounted_price}}</span></div></a>
+  {% endfor %}
+</div>
+
+
+
 </div>
 
 

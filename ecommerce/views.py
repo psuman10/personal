@@ -116,8 +116,13 @@ def customerregistration(request):
 def home(request):
  return render(request, 'BC/home.html')
 
+@login_required
 def orders(request):
- return render(request, 'BC/orders.html')
+    totalitem = 0
+    if request.user.is_authenticated:
+        totalitem = len(Cart.objects.filter(user=request.user))
+    op = OrderPlaced.objects.filter(user=request.user)
+    return render(request, 'BC/orders.html', {'order_placed': op, 'totalitem': totalitem})
 
 def product_detail(request):
      return render(request, 'BC/productdetail.html')
