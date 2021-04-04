@@ -10,6 +10,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from .models import Profile
 from .forms import ProfileForm
+from django.http.response import HttpResponseRedirect
 
 
 class ProductView(View):
@@ -365,9 +366,14 @@ def ProfileView(request):
             
             
             reg=Customer(user=usr,name=name,locality=locality,city=city,state=state)
+    
             reg.save()
             fm= CustomerProfileForm()
+            
     else:
         fm= CustomerProfileForm()
     stud=Customer.objects.all()
+    print(stud)
     return render(request,'BC/profile.html',{'form':fm,'stu':stud})
+
+
