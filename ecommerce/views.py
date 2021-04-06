@@ -377,3 +377,21 @@ def ProfileView(request):
     return render(request,'BC/profile.html',{'form':fm,'stu':stud})
 
 
+@login_required
+def payment_done(request):
+    totalitem = 0
+    if request.user.is_authenticated:
+        totalitem = len(Cart.objects.filter(user=request.user))
+    user = request.user
+    custid = request.GET.get('custid')
+    customer = Customer.objects.get(id=custid)
+    cart = Cart.objects.filter(user=user)
+    for c in cart:
+        OrderPlaced(user=user, customer=customer,
+                    product=c.product, quantity=c.quantity).save()
+        c.delete()
+    return redirect("orders")
+
+    return redirect("orders", {'totalitem': totalitem})
+
+

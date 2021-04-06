@@ -27,6 +27,7 @@ urlpatterns = [
     path('deleteaddress/<int:id>/', views.delete_address, name='deleteaddress'),
     path('<int:id>/',views.update_address.as_view(),name="updateaddress"),
     path('profile1/', views.user_account, name='profile1'),
+    path('paymentdone/', views.payment_done, name='paymentdone'),
 
     # path('buy/', views.buy_now, name='buy-now'),
     path('profile/', views.ProfileView, name='profile'),

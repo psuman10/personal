@@ -12,8 +12,8 @@
         </div>
         {% endfor %}
         <div class="col-12 mt-3">
-          {% comment %} <button href={% url 'showcart' %} type="submit" class="btn btn-primary mb-3">Submit</button> {% endcomment %}
-           <a href="{% url 'checkout' %}" class="btn btn-primary btn-sm">Submit</a>
+          <button type="submit" class="btn btn-primary mb-3">Submit</button> 
+           {% comment %} <a href="{% url 'checkout' %}" class="btn btn-primary btn-sm">Submit</a> {% endcomment %}
         </div>
         {% if messages %} {% for message in messages %}
         <p
