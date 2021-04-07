@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ecommerce',
-    'bootstrapform'
+    'bootstrapform',
+    'admins'
 ]
 
 MIDDLEWARE = [
@@ -130,7 +131,7 @@ STATIC_URL = '/static/'
 STATIFILES_DIR = os.path.join(BASE_DIR, 'static')
 MEDIA_URL= '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-LOGIN_REDIRECT_URL = '/profile1'
+LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
 SESSION_ENGINE="django.contrib.sessions.backends.db"

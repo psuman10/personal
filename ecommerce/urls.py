@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib.auth.forms import AuthenticationForm
 from . import views
 from django.conf.urls.static import static
 from django.conf import settings
@@ -35,7 +36,8 @@ urlpatterns = [
     path('orders/', views.orders, name='orders'),
     path('registration/', views.CustomerRegistrationView.as_view(),name='customerregistration'),
     path('checkout/', views.checkout, name='checkout'),
-    path('login/', auth_views.LoginView.as_view(template_name='BC/login.html',authentication_form=LoginForm), name='login'),
+    # path('login/', auth_views.LoginView.as_view(template_name='BC/login.html',authentication_form=LoginForm), name='login'),
+    path('login/',views.login_user, name='login'),
 
 
 
@@ -55,6 +57,19 @@ urlpatterns = [
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(
         template_name='BC/password_reset_complete.html'), name='password_reset_complete'),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+
+
+
+         # admins
+    path("admin-product/list/", views.AdminProductListView.as_view(),
+         name="adminproductlist"),
+    path("admin-all-orders/", views.AdminOrderListView.as_view(), name="adminorderlist"),
+    path("admin-product/add/", views.AdminProductCreateView.as_view(),
+         name="adminproductcreate"),
+    path("admin-order/<int:pk>/", views.AdminOrderDetailView.as_view(),
+         name="adminorderdetail"),
+    path("admin-order-<int:pk>-change/",
+         views.AdminOrderStatuChangeView.as_view(), name="adminorderstatuschange"),
 
 
 

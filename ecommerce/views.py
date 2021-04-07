@@ -1,16 +1,83 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from .models import Customer, Product, Cart, OrderPlaced
-from .forms import CustomerRegistrationForm, CustomerProfileForm
+from .forms import CustomerRegistrationForm, CustomerProfileForm, LoginForm, ProductForm
 from django.contrib import messages
 from django.db.models import Q
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate,login
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView
+from django.views.generic import ListView, CreateView, DetailView, TemplateView
 from .models import Profile
 from .forms import ProfileForm
 from django.http.response import HttpResponseRedirect
+from .auth import admin_only, unauthenticated_user, user_only
+from django.urls import reverse_lazy, reverse
+
+
+
+
+
+#admins
+
+@method_decorator(admin_only , name='dispatch')
+class AdminProductListView(ListView):
+    template_name = "admins/adminproductlist.html"
+    queryset = Product.objects.all().order_by("-id")
+    context_object_name = "allproducts"
+
+
+@method_decorator(admin_only , name='dispatch')
+class AdminProductCreateView(CreateView):
+    template_name = "admins/adminproductcreate.html"
+    form_class = ProductForm
+    success_url = reverse_lazy("adminproductlist")
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+@method_decorator(admin_only , name='dispatch')
+class AdminOrderDetailView(DetailView):
+    template_name = "admins/adminorderdetail.html"
+    model = OrderPlaced
+    context_object_name = "ord_obj"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["allstatus"] = STATUS_CHOICES
+        return context
+
+@method_decorator(admin_only , name='dispatch')
+class AdminOrderListView(ListView):
+    template_name = "admins/adminorderlist.html"
+    queryset = OrderPlaced.objects.all().order_by("-id")
+    context_object_name = "allorders"
+
+@method_decorator(admin_only , name='dispatch') 
+class AdminOrderStatuChangeView(View):
+    def post(self, request,*args, **kwargs):
+        order_id = self.kwargs["pk"]
+        print(order_id)
+        order_obj = OrderPlaced.objects.get(id=order_id)
+        new_status = request.POST.get("status")
+        order_obj.status = new_status
+        order_obj.save()
+        return redirect(reverse_lazy("adminorderdetail", kwargs={"pk": order_id}))
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class ProductView(View):
@@ -54,10 +121,10 @@ class CustomerRegistrationView(View):
         return render(request, 'BC/customerregistration.html', {'form': form, 'active': 'btn-primary'})
 
 
-
+@unauthenticated_user
 def login_user(request):
     if request.user.is_authenticated:
-        return render(request,'BC/home.html')
+        return render(request, 'BC/home.html')
     else:
         if request.method == 'POST':
             form = LoginForm(request.POST)
@@ -68,7 +135,8 @@ def login_user(request):
                 if user is not None:
                     if not user.is_staff:
                         login(request, user)
-                        return redirect("home")
+                        
+                        return redirect('home')
                     elif user.is_staff:
                         login(request, user)
                         return redirect('/admin-dashboard')
