@@ -22,6 +22,9 @@ class Customer(models.Model):
         return str(self.id)
 
 
+
+
+
 CATEGORY_CHOICES = (
 
     ('F', 'FULLFACE'),
@@ -55,13 +58,33 @@ STATUS_CHOICES = (
 )
 
 
+
+
+
+
 class OrderPlaced(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200, null=True)
+    locality = models.CharField(max_length=200, null=True)
+    city = models.CharField(max_length=200, null=True)
+    state = models.CharField(choices=STATE_CHOICES, max_length=50, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     ordered_date = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pending')
+    status = models.CharField(
+        max_length=50, choices=STATUS_CHOICES, default='Pending')
+
+    @property
+    def total_cost(self):
+        return self.quantity * self.product.discounted_price
+
+    @property
+    def total_amount(self):
+
+        return (self.quantity * self.product.discounted_price)+100
+
+    
 
 
 class Cart(models.Model):
