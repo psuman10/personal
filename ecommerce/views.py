@@ -49,11 +49,15 @@ class AdminOrderDetailView(DetailView):
         context["allstatus"] = STATUS_CHOICES
         return context
 
-@method_decorator(admin_only , name='dispatch')
-class AdminOrderListView(ListView):
+# @method_decorator(admin_only , name='dispatch')
+def AdminOrderListView(request):
     template_name = "admins/adminorderlist.html"
-    queryset = OrderPlaced.objects.all().order_by("-id")
-    context_object_name = "allorders"
+    allorders = OrderPlaced.objects.all().order_by("-id")
+    customer=Customer.objects.all().order_by("-id")
+    context={'allorders':allorders,"customer":customer}
+    return render(request,template_name,context)
+
+
 
 @method_decorator(admin_only , name='dispatch') 
 class AdminOrderStatuChangeView(View):

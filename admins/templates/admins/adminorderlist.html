@@ -14,10 +14,7 @@
                     <tr>
                         <th>SN</th>
                         <th>Order ID </th>
-                        <th>Customer</th>
-                        <th>Locality</th>
-                        <th>City</th> 
-                        <th>State</th>
+                        
                         <th>Product</th>
                         <th>Quantity</th>
                         <th>Ordered Date</th>
@@ -29,10 +26,6 @@
                     <tr>
                         <td>{{forloop.counter}}</td>
                         <td><a href="{% url 'adminorderdetail' order.id %}">#ORDER_{{order.id}}</a></td>
-                        <td>{{order.name}}</td>
-                        <td>{{order.locality}}</td>
-                        <td>{{order.city}}</td>
-                        <td>{{order.state}}</td>
                         <td>{{order.product}}</td>
                         <td>{{order.quantity}}</td>
                         <td>{{order.ordered_date}}</td>

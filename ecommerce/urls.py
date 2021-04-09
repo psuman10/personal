@@ -63,7 +63,7 @@ urlpatterns = [
          # admins
     path("admin-product/list/", views.AdminProductListView.as_view(),
          name="adminproductlist"),
-    path("admin-all-orders/", views.AdminOrderListView.as_view(), name="adminorderlist"),
+    path("admin-all-orders/", views.AdminOrderListView, name="adminorderlist"),
     path("admin-product/add/", views.AdminProductCreateView.as_view(),
          name="adminproductcreate"),
     path("admin-order/<int:pk>/", views.AdminOrderDetailView.as_view(),

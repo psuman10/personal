@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from ecommerce.models import Product,CATEGORY_CHOICES
+from ecommerce.models import Product,OrderPlaced,CATEGORY_CHOICES
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView
 from admins.forms import ProductForm
@@ -66,11 +66,13 @@ def admin_dashboard(request):
     user_count = users.filter(is_staff=0).count()
     admin_count = users.filter(is_staff=1).count()
     product_count=Product.objects.all().filter().count()
+    order_count=OrderPlaced.objects.all().filter().count()
     context = {
        
         'user_count': user_count,
         'admin_count': admin_count,
         'product_count':product_count,
+        'order_count':order_count,
    
     }
     return render(request, 'admins/admin-dashboard.html', context)
