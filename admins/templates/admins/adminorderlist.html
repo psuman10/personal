@@ -14,7 +14,6 @@
                     <tr>
                         <th>SN</th>
                         <th>Order ID </th>
-                        
                         <th>Product</th>
                         <th>Quantity</th>
                         <th>Ordered Date</th>
@@ -26,7 +25,7 @@
                     <tr>
                         <td>{{forloop.counter}}</td>
                         <td><a href="{% url 'adminorderdetail' order.id %}">#ORDER_{{order.id}}</a></td>
-                        <td>{{order.product}}</td>
+                        <td>{{order.product.title}}</td>
                         <td>{{order.quantity}}</td>
                         <td>{{order.ordered_date}}</td>
                         <td>{{order.status}}</td>

@@ -26,7 +26,7 @@ urlpatterns = [
     path('Fullface/', views.Fullface, name='Fullface'),
     path('Fullface/<slug:data>', views.Fullface, name='Fulldata'),
     path('deleteaddress/<int:id>/', views.delete_address, name='deleteaddress'),
-    path('<int:id>/',views.update_address.as_view(),name="updateaddress"),
+    path('updateaddress<int:id>/',views.update_address.as_view(),name="updateaddress"),
     path('profile1/', views.user_account, name='profile1'),
     path('paymentdone/', views.payment_done, name='paymentdone'),
 
@@ -36,7 +36,6 @@ urlpatterns = [
     path('orders/', views.orders, name='orders'),
     path('registration/', views.CustomerRegistrationView.as_view(),name='customerregistration'),
     path('checkout/', views.checkout, name='checkout'),
-    # path('login/', auth_views.LoginView.as_view(template_name='BC/login.html',authentication_form=LoginForm), name='login'),
     path('login/',views.login_user, name='login'),
 
 
@@ -49,7 +48,7 @@ urlpatterns = [
         template_name='BC/passwordchangedone.html'), name='passwordchangedone'),
 
     path('password-reset/', auth_views.PasswordResetView.as_view(template_name='BC/password_reset.html',
-                                                                 form_class=MyPasswordResetForm), name='password_reset'),
+                                                                    form_class=MyPasswordResetForm), name='password_reset'),
     path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(
         template_name='BC/password_reset_done.html'), name='password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(

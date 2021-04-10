@@ -72,18 +72,6 @@ class AdminOrderStatuChangeView(View):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 class ProductView(View):
     def get(self, request):
         totalitem = 0
@@ -159,8 +147,7 @@ def login_user(request):
 def address(request):
  return render(request, 'BC/address.html')
 
-# def buy_now(request):
-#  return render(request, 'BC/buynow.html')
+
 
 def change_password(request):
  return render(request, 'BC/changepassword.html')
@@ -183,8 +170,7 @@ def checkout(request):
         totalamount = amount + shipping_amount
     return render(request, 'BC/checkout.html', {'add': add, 'totalamount': totalamount, 'cart_items': cart_items, 'totalitem': totalitem})
 
-def customerregistration(request):
- return render(request, 'BC/customerregistration.html')
+
 
 def home(request):
  return render(request, 'BC/home.html')
@@ -200,8 +186,7 @@ def orders(request):
 def product_detail(request):
      return render(request, 'BC/productdetail.html')
 
-# def profile(request):
-#  return render(request, 'BC/profile.html')
+
 
 def add_to_cart(request):
     user = request.user
@@ -231,12 +216,6 @@ def show_cart(request):
 
         else:
             return render(request, 'BC/emptycart.html')
-
-
-
-
-
-
 
 
 def Halfface(request, data=None):
@@ -369,7 +348,6 @@ def plus_cart(request):
         for p in cart_product:
             tempamount = (p.quantity * p.product.discounted_price)
             amount += tempamount
-
         data = {
 
             'quantity': c.quantity,
@@ -444,8 +422,7 @@ def ProfileView(request):
             
     else:
         fm= CustomerProfileForm()
-    stud=Customer.objects.all()
-    print(stud)
+    stud = Customer.objects.filter(user=request.user)
     return render(request,'BC/profile.html',{'form':fm,'stu':stud})
 
 

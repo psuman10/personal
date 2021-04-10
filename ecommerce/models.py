@@ -22,9 +22,6 @@ class Customer(models.Model):
         return str(self.id)
 
 
-
-
-
 CATEGORY_CHOICES = (
 
     ('F', 'FULLFACE'),
