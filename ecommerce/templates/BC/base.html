@@ -104,9 +104,11 @@
             {% if request.user.is_staff %}
  
             <li class="nav-item mx-2">
-             <a href="{% url 'dashboard' %}" class="nav-link text-white"><span class="badge bg-danger"></span> Admin Dashboard </a>
+             <a href="{% url 'dashboard' %}" class="btn btn-primary">Dashboard </a>
             </li>
             {% endif %}
+
+            {% comment %} <a href="{% url 'home' %}" class="btn btn-primary">Submit</a> {% endcomment %}
 
           </ul>
          </div>

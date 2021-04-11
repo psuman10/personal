@@ -7,9 +7,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from ecommerce.models import Product,OrderPlaced,CATEGORY_CHOICES
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView
+from django.views.generic import CreateView, View
 from admins.forms import ProductForm
 from django.urls import reverse_lazy
+from django.http.response import HttpResponseRedirect
+
 
 
 
@@ -87,3 +89,38 @@ class AdminProductCreateView(CreateView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
+
+
+@admin_only
+@login_required
+def delete_product(request,id):
+    if request.method=='POST':
+        pi=Product.objects.get(pk=id)
+        pi.delete()
+        return HttpResponseRedirect('/admin-product/list/')
+@method_decorator(login_required,name='dispatch')
+@method_decorator(admin_only,name='dispatch')
+
+
+
+class update_product(View):
+    def get(self, request, id):
+        pi = Product.objects.get(pk=id)
+        fm = ProductForm(instance=pi)
+        return render(request, 'admins/productupdate.html', {'form': fm})
+        
+    def post(self, request, id):
+        pi = Product.objects.get(pk=id)
+        fm = ProductForm(request.POST, instance=pi)
+        if fm.is_valid():
+            fm.save()
+        return HttpResponseRedirect('/admin-product/list/')
+
+@admin_only
+@login_required
+def delete_order(request,id):
+    if request.method=='POST':
+        pi=OrderPlaced.objects.get(pk=id)
+        pi.delete()
+        return HttpResponseRedirect('/admin-all-orders')

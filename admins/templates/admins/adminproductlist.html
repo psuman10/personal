@@ -22,7 +22,8 @@
                         <th>Description</th>
                         <th>Brand</th>
                         <th>Category</th>
-                        <button type="button">Click Me!</button>
+                        <th>Action </th>
+                        
                     </tr>
                     
                 </thead>
@@ -37,6 +38,24 @@
                         <td>{{p.description}}</td>
                         <td>{{p.brand}}</td>
                         <td>{{p.category}}</td>
+                         <td>
+                <a
+                  href="{% url 'updateproduct' p.id %}"
+                  class="btn btn-warning btn-sm"
+                  >Edit</a
+                >
+              </td>
+ 
+              <td>
+                <form
+                  action="{% url 'deleteproduct' p.id %}"
+                  method="POST"
+                  class="d-inline"
+                >
+                  {% csrf_token %}
+                  <input type="submit" value="Delete" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete this product?')">
+                </form>
+              </td>
                     </tr>
                     {% endfor %}
                 </tbody>
