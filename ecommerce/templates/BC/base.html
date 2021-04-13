@@ -28,7 +28,11 @@
     <link rel="icon" href="{% static 'BBC/images/banner/logo.png' %}">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<style>
+
+
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
         <div clas="loll">
         <a class="navbar-brand" href="/"><img class="web-logo" src="{% static 'BBC/images/banner/logo.png' %}" alt=""></a>
@@ -108,12 +112,16 @@
             </li>
             {% endif %}
 
-            {% comment %} <a href="{% url 'home' %}" class="btn btn-primary">Submit</a> {% endcomment %}
+            
+            
 
           </ul>
+          
          </div>
        </div>
      </div>
+     {% comment %} <img src="{% static 'BBC/images/icon/moon.png' %}" id="icon" onclick="myFunction()"> {% endcomment %}
+     
     </nav>
     {% block banner_slider %} {% endblock banner_slider %}
     {% block livesale %} {% endblock livesale %}
@@ -122,27 +130,6 @@
     {% block payment-gateway %}
     
     {% endblock payment-gateway %}
-
-
-
-           
- 
-           
-           
-          
-     
-
-{% comment %} <div class="mobile-position">
-             <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="darkSwitch">
-                  <label class="custom-control-label" for="darkSwitch" style="color: #0b2e13">Dark</label>
-             </div>
-        </div>
-</div> {% endcomment %}
-
-
-
-
 
 
 <footer class="footer">
@@ -224,6 +211,13 @@
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
 
+
+{% comment %} <script>
+function myFunction() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
+</script> {% endcomment %}
 
 </body>
 </html>

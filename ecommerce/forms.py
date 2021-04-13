@@ -34,6 +34,9 @@ class CustomerRegistrationForm(UserCreationForm):
             attrs={'class': 'form-control'})}
 
 
+
+
+
 class LoginForm(forms.Form):
     username = UsernameField(widget=forms.TextInput(
         attrs={'autofocus': True, 'class': 'form-control'}))

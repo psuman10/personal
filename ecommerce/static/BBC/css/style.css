@@ -16,6 +16,19 @@ body{
     box-sizing: border-box;
 }
 
+
+#icon{
+    width: 30px;
+    cursor: pointer;
+}
+
+
+.dark-mode {
+    background-color: black;
+    color: white;
+  }
+
+
 /* Search Box */
 
 
@@ -91,7 +104,8 @@ body{
 
 
 .body{
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
+    background-color: var( --secondary-color);
 }
 
 .test :hover{
