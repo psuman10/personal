@@ -1,11 +1,12 @@
 from ecommerce.auth import admin_only
 from django.contrib.auth.forms import UserCreationForm
+from ecommerce.forms import CustomerRegistrationForm
 from .models import *
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from ecommerce.models import Product,OrderPlaced,CATEGORY_CHOICES
+from ecommerce.models import Product,OrderPlaced,CATEGORY_CHOICES,Profile
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, View
 from admins.forms import ProductForm
@@ -47,16 +48,17 @@ def update_user_to_admin(request, user_id):
 @login_required
 def register_user_admin(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomerRegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            messages.add_message(request, messages.SUCCESS, 'User Registered Successfully')
-            return redirect('/admin-dashboard')
+            user=form.save()
+            Profile.objects.create(user=user,username=user.username)
+            return redirect('/admin-dashboard/show-user')
+ 
         else:
             messages.add_message(request, messages.ERROR, 'Please provide correct details')
             return render(request, "admins/register-user-admin.html", {'form': form})
     context = {
-        'form': UserCreationForm
+        'form': CustomerRegistrationForm
     }
     return render(request, 'admins/register-user-admin.html', context)
 
@@ -124,3 +126,12 @@ def delete_order(request,id):
         pi=OrderPlaced.objects.get(pk=id)
         pi.delete()
         return HttpResponseRedirect('/admin-all-orders')
+
+
+@admin_only
+@login_required
+def delete_user(request,id):
+    if request.method=='POST':
+        pi=User.objects.get(pk=id)
+        pi.delete()
+        return HttpResponseRedirect('/admin-dashboard/show-user')

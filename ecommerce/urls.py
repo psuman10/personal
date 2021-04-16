@@ -34,7 +34,7 @@ urlpatterns = [
     path('profile/', views.ProfileView, name='profile'),
     path('address/', views.address, name='address'),
     path('orders/', views.orders, name='orders'),
-    path('registration/', views.CustomerRegistrationView.as_view(),name='customerregistration'),
+    path('registration/', views.CustomerRegistrationView,name='customerregistration'),
     path('checkout/', views.checkout, name='checkout'),
     path('login/',views.login_user, name='login'),
 

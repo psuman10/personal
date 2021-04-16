@@ -100,5 +100,5 @@ class Profile(models.Model):
     phone=models.CharField(max_length=10,null=True)
     username=models.CharField(max_length=200,null=True)
     email=models.EmailField()
-    profile_pic=models.FileField(upload_to='static/userimage')
+    profile_pic=models.FileField(upload_to='static/userimage',default='static/userimage/usericon.png')
     created_date=models.DateTimeField(auto_now_add=True)
