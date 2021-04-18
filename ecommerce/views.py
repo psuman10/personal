@@ -99,23 +99,8 @@ class ProductDetailView(View):
 
 
 
-# class CustomerRegistrationView(View):
-#     def get(self, request):
-#         form = CustomerRegistrationForm()
-#         return render(request, 'BC/customerregistration.html', {'form': form})
- 
-#     def post(self, request):
-#         form = CustomerRegistrationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             Profile.objects.create(user=user, username=user.username)
-#             messages.add_message(
-#                     request, messages.SUCCESS, 'User registered successfully')
-#             return redirect('login')
-#         return render(request, 'BC/customerregistration.html', {'form': form, 'active': 'btn-primary'})
 
 
-@unauthenticated_user
 @unauthenticated_user
 def login_user(request):
     if request.user.is_authenticated:
